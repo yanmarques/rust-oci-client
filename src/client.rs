@@ -1969,6 +1969,8 @@ pub fn windows_amd64_resolver(manifests: &[ImageIndexEntry]) -> Option<String> {
 
 const MACOS: &str = "macos";
 const DARWIN: &str = "darwin";
+const ANDROID: &str = "android";
+const LINUX: &str = "linux";
 
 fn go_os() -> &'static str {
     // Massage Rust OS var to GO OS:
@@ -1976,6 +1978,8 @@ fn go_os() -> &'static str {
     // - Go: https://golang.org/doc/install/source#environment
     match std::env::consts::OS {
         MACOS => DARWIN,
+        // use linux images on android
+        ANDROID => LINUX,
         other => other,
     }
 }
